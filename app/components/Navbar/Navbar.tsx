@@ -7,7 +7,6 @@ export default function Navbar(){
     return(
         <nav className={styles.navbar}>
             <Link href="/" className={styles.logo}>
-         
                 <h1>Movie Set Web</h1>
             </Link>
             <ul className={styles.menu}>
