@@ -1,14 +1,22 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../api/db";
 
+
+enum UserRole{
+  ORGANIZER = "ORGANIZER",
+  CUSTOMER = "CUSTOMER",
+  GATE = "GATE",
+}
+
 interface UserAttributes {
    id: number;
    email: string;
    name: string;
    password_hash: string;
+   role: UserRole;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
+interface UserCreationAttributes extends Optional<UserAttributes, "id" | "role"> {}
 
 class User extends Model<UserAttributes, UserCreationAttributes>
   implements UserAttributes {
@@ -16,6 +24,7 @@ class User extends Model<UserAttributes, UserCreationAttributes>
   declare email: string;
   declare name: string;
   declare password_hash: string;
+  declare role: UserRole;
 }
 
 User.init(
@@ -38,6 +47,11 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    role: {
+      type:DataTypes.ENUM(...Object.values(UserRole)),
+      allowNull: false,
+      defaultValue: UserRole.CUSTOMER,
+    }
   },
   {
     sequelize,          // conexão
