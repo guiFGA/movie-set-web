@@ -18,7 +18,7 @@ export default function Navbar(){
                 <li><Link href="/portaria">Portaria</Link></li>
                 
             </ul>
-            <Link href="/login" className={styles.login}><FaUser/></Link>
+            <Link href="/cadastro" className={styles.login}><FaUser/></Link>
             
 
         </nav>

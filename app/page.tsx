@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getPopularMovies, searchMovies } from "./api/tmdb";
 
 
+
 import styles from './page.module.css';
 
 
@@ -17,6 +18,8 @@ interface Movie {
 
 export default function Home() {
   
+
+
   const [movies, setMovies] = useState<Movie[]>([]);
   const [search, setSearch] = useState("");
 

@@ -1,28 +1,28 @@
 import { Sequelize } from "sequelize";
 
+const sequelize = new Sequelize(process.env.DATABASE_URL!, {
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: { require: true, rejectUnauthorized: false },
+  },
+  logging: false,
+});
 
-declare global {
-    var sequelize: Sequelize | undefined;
+export async function connectDatabase() {
+  try {
+    await sequelize.authenticate();
+    console.log("Banco conectado com sucesso.");
+
+    // Use apenas na primeira execução para criar as tabelas.
+    // Depois que as tabelas existirem, pode comentar esta linha.
+    await sequelize.sync();
+
+    console.log("Banco sincronizado.");
+  } catch (error) {
+    console.error("Erro ao conectar ao banco:", error);
+    throw error;
+  }
 }
-
-if (!global.sequelize) {
-  global.sequelize = new Sequelize(process.env.DATABASE_URL!, {
-    dialect: "postgres",
-    dialectOptions: {
-      ssl: { require: true, rejectUnauthorized: false },
-    },
-  });
-  global.sequelize.sync({ alter:true })
-    .then(()=>{
-        console.log("Tabelas sincronizadas com sucesso")
-    })
-    .catch((err) => {
-        console.error("Erro ao sincronizar tabelas: ", err);
-    });
-    
-}
-
-const sequelize = global.sequelize;
 
 export { sequelize };
 
