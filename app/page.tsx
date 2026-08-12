@@ -6,6 +6,7 @@ import { getPopularMovies, searchMovies } from "./api/tmdb";
 
 import styles from './page.module.css';
 
+
 interface Movie {
   id: number;
   title: string;
