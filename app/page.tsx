@@ -67,8 +67,7 @@ export default function Home() {
       <div className={styles.grid}>
         {movies.map((movie) => (
           <div key={movie.id} className={styles.card}>
-
-            
+          
             <img className={styles.poster} src={movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : "/fallback.png"}/>
             
             <div className={styles.content}>
@@ -83,7 +82,9 @@ export default function Home() {
               <p className={styles.overview}>
                 {movie.overview}
               </p>
+              
             </div>
+           
           </div>
         ))}
       </div>

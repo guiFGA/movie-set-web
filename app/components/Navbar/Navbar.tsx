@@ -11,9 +11,11 @@ export default function Navbar(){
             </Link>
             <ul className={styles.menu}>
                 <li><Link href="/">Início</Link></li>
+                
                 <li><Link href="/meus-ingressos">Meus Ingressos</Link></li>
-                <li><Link href="/portaria">Portaria</Link></li>
+                <li><Link href="/">Eventos Disponíveis</Link></li>
                 <li><Link href="/criar-eventos">Criar eventos</Link></li>
+                <li><Link href="/portaria">Portaria</Link></li>
                 
             </ul>
             <Link href="/login" className={styles.login}><FaUser/></Link>
