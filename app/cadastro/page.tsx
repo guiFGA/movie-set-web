@@ -16,7 +16,7 @@ const [role, setRole] = useState<"CUSTOMER" |"ORGANIZER">("CUSTOMER");
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const res = await fetch("/api/cadastro", {
+    const res = await fetch("/api/auth/cadastro", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, name, password, role, }),
