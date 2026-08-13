@@ -6,9 +6,9 @@ import { connectDatabase } from "../db";
 export async function POST(req: Request) {
 
   connectDatabase();
-  
+
   try {
-    const { email, name, password } = await req.json();
+    const { email, name, password, role } = await req.json();
 
     // Valida campos obrigatórios
     if (!email || !name || !password) {
@@ -35,6 +35,7 @@ export async function POST(req: Request) {
       email,
       name,
       password_hash,
+      role,
     });
 
     return NextResponse.json({

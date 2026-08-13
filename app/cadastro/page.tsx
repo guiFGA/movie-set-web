@@ -8,6 +8,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+const [role, setRole] = useState<"CUSTOMER" |"ORGANIZER">("CUSTOMER");
   const [message, setMessage] = useState("");
   const router = useRouter()
   
@@ -18,7 +19,7 @@ export default function RegisterPage() {
     const res = await fetch("/api/cadastro", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, name, password }),
+      body: JSON.stringify({ email, name, password, role, }),
     });
 
 
@@ -85,6 +86,44 @@ export default function RegisterPage() {
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
+
+            <label>Tipo de conta</label>
+
+            <div className="role-selector">
+              <label
+                className={`role-card ${role === "CUSTOMER" ? "selected" : ""}`}
+              >
+                <input
+                  type="radio"
+                  name="role"
+                  value="CUSTOMER"
+                  checked={role === "CUSTOMER"}
+                  onChange={() => setRole("CUSTOMER")}
+                />
+
+                <span className="role-title">Cliente</span>
+                <span className="role-description">
+                  Quero comprar ingressos
+                </span>
+              </label>
+
+              <label
+                className={`role-card ${role === "ORGANIZER" ? "selected" : ""}`}
+              >
+                <input
+                  type="radio"
+                  name="role"
+                  value="ORGANIZER"
+                  checked={role === "ORGANIZER"}
+                  onChange={() => setRole("ORGANIZER")}
+                />
+
+                <span className="role-title">Organizador</span>
+                <span className="role-description">
+                  Quero criar eventos
+                </span>
+              </label>
+            </div>
 
             <button type="submit">Enviar</button>
           </form>
