@@ -5,7 +5,6 @@ import { connectDatabase } from "../db";
 
 export async function POST(req: Request) {
 
-  connectDatabase();
 
   try {
     const { email, name, password, role } = await req.json();
