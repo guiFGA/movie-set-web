@@ -1,6 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../api/db";
-import { Event } from "./Event";
+import { Event } from "./Event"
 
 interface SeatAttributes {
   id: number;
