@@ -31,7 +31,7 @@ interface EventCreationAttributes
   extends Optional<
     EventAttributes,
     "id" | "description" | "poster_url" | "status"
-  > {}
+    > {}
 
 class Event
   extends Model<EventAttributes, EventCreationAttributes>
