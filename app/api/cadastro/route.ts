@@ -4,7 +4,9 @@ import { User } from "../../models/User";
 import { connectDatabase } from "../db";
 
 export async function POST(req: Request) {
-  //connectDatabase() comentado para nao ficar sincronizando com o banco de dados
+
+  connectDatabase();
+  
   try {
     const { email, name, password } = await req.json();
 

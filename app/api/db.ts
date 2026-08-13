@@ -13,9 +13,7 @@ export async function connectDatabase() {
     await sequelize.authenticate();
     console.log("Banco conectado com sucesso.");
 
-    // Use apenas na primeira execução para criar as tabelas.
-    // Depois que as tabelas existirem, pode comentar esta linha.
-    await sequelize.sync();
+    //await sequelize.sync();
 
     console.log("Banco sincronizado.");
   } catch (error) {
