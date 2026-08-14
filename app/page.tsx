@@ -1,9 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { getPopularMovies, searchMovies } from "./api/tmdb";
-
-
 
 import styles from './page.module.css';
 
