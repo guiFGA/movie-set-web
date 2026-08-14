@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import { Op } from "sequelize";
 
-import { Event } from "../../models/Event";
+import { Event, EventStatus } from "../../models/Event";
 import { Seat } from "../../models/Seat";
 
 interface JwtPayload {
@@ -24,6 +25,8 @@ interface CreateEventBody {
   room: string;
   capacity: number;
 }
+
+//CRIAÇÃO DE EVENTOS
 
 export async function POST(request: NextRequest) {
   try {
@@ -204,6 +207,60 @@ export async function POST(request: NextRequest) {
       {
         success: false,
         error: "Erro interno ao criar sessão",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}
+
+//RETORNAR EVENTOS DISPONÍVEIS
+export async function GET() {
+  try {
+    const events = await Event.findAll({
+      where: {
+        status: EventStatus.PUBLISHED,
+
+        event_date: {
+          [Op.gt]: new Date(),
+        },
+      },
+
+      order: [
+        ["event_date", "ASC"],
+      ],
+
+      attributes: [
+        "id",
+        "tmdb_id",
+        "title",
+        "description",
+        "poster_url",
+        "event_date",
+        "location",
+        "room",
+        "capacity",
+        "price",
+      ],
+    });
+
+    return NextResponse.json(
+      {
+        success: true,
+        events,
+      },
+      {
+        status: 200,
+      }
+    );
+  } catch (error) {
+    console.error("Erro ao buscar eventos:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Erro ao buscar eventos disponíveis",
       },
       {
         status: 500,
