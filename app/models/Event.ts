@@ -19,6 +19,7 @@ interface EventAttributes {
 
   event_date: Date;
 
+  location: string;
   room: string;
   capacity: number;
 
@@ -48,6 +49,7 @@ class Event
 
   declare event_date: Date;
 
+  declare location: string;
   declare room: string;
   declare capacity: number;
 
@@ -95,6 +97,11 @@ Event.init(
 
     event_date: {
       type: DataTypes.DATE,
+      allowNull: false,
+    },
+
+    location: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
 

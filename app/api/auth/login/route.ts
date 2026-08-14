@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
       },
       process.env.JWT_SECRET!,
       {
-        expiresIn: "20m",
+        expiresIn: "60m",
       }
     );
 
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
       httpOnly: true,
       secure: process.env.NODE_ENV === "development",
       sameSite: "lax",
-      maxAge: 60 * 20,
+      maxAge: 60 * 60,
       path: "/",
     });
 

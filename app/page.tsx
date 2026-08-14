@@ -18,37 +18,35 @@ interface Movie {
 
 export default function Home() {
   
-
-
   const [movies, setMovies] = useState<Movie[]>([]);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    async function fetchMovies(){
-      const popular = await getPopularMovies();
-      console.log("Filmes Populares: ", popular)
-      setMovies(popular);
-     
-    }
-    
-    fetchMovies();
-  }, []);
 
   useEffect(() => {
-  const timer = setTimeout(async () => {
-    if (!search.trim()) {
-      const popular = await getPopularMovies();
-      setMovies(popular);
-      return;
-    }
+    const timer = setTimeout(async () => {
+      try {
+        let res;
 
-    const results = await searchMovies(search);
-    setMovies(results);
-  }, 500);
+        if (!search.trim()) {
+          res = await fetch("/api/movies/popular");
+        } else {
+          res = await fetch(
+            `/api/movies/search?query=${encodeURIComponent(search)}`
+          );
+        }
 
-  return () => clearTimeout(timer);
-}, [search]);
+        const data = await res.json();
 
+        setMovies(data.movies ?? []);
+      } catch (error) {
+        console.error("Erro ao buscar filmes:", error);
+        setMovies([]);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+  
   return (
     <div className={styles.container}>
       
