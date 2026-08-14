@@ -1,0 +1,191 @@
+
+.register-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; 
+  color: #fff; 
+}
+
+/* Lado esquerdo */
+.register-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  text-align: center;
+}
+
+.register-left h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.register-left p {
+  max-width: 400px;
+  color: #ccc;
+}
+
+.register-left .login-link {
+  margin-top: 1rem;
+  color: #aaa;
+}
+
+.register-left .login-link a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Lado direito */
+.register-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.register-card {
+  background-color: #222; /* cinza escuro */
+  padding: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.register-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.register-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.register-card label {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.register-card input {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background-color: #333;
+  color: #fff;
+}
+
+.role-selector {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+.role-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  padding: 16px;
+
+  border: 2px solid #ddd;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.role-card input {
+  display: none;
+}
+
+.role-card:hover {
+  border-color: #888;
+}
+
+.role-card.selected {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.178);
+  color:#000;
+  background-color: #f7f7f7;
+}
+
+.role-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.role-description {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+.register-card input:focus {
+  outline: none;
+  border-color: #fff;
+}
+
+.register-card button {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #fff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register-card button:hover {
+  background-color: #ddd;
+}
+
+.message {
+  margin-top: 1rem;
+  text-align: center;
+  color: #ccc;
+}
+
+/* 📱 Responsividade */
+@media (max-width: 768px) {
+  .register-container {
+    flex-direction: column; /* empilha os lados */
+  }
+
+  .register-left,
+  .register-right {
+    flex: none;
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .register-left h1 {
+    font-size: 1.5rem;
+  }
+
+  .register-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-left h1 {
+    font-size: 1.2rem;
+  }
+
+  .register-card {
+    padding: 1.5rem;
+  }
+
+  .register-card input,
+  .register-card button {
+    padding: 0.6rem;
+  }
+}

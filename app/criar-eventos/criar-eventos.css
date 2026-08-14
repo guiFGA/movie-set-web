@@ -1,0 +1,360 @@
+.create-event-container {
+  min-height: 100vh;
+  padding: 3rem 6rem;
+  color: #fff;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.create-event-header {
+  margin-bottom: 2.5rem;
+}
+
+.create-event-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.create-event-header p {
+  color: #aaa;
+}
+
+/* =========================
+   PESQUISA
+========================= */
+
+.movie-search-section {
+  max-width: 700px;
+  margin-bottom: 3rem;
+}
+
+.movie-search-section label {
+  display: block;
+  margin-bottom: 0.8rem;
+  color: #ddd;
+  font-size: 0.9rem;
+}
+
+.search-box {
+  display: flex;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem;
+
+  border-radius: 6px;
+  border: 1px solid #444;
+
+  background-color: #333;
+  color: #fff;
+}
+
+.search-box input::placeholder {
+  color: #999;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #fff;
+}
+
+.search-status {
+  margin-top: 0.7rem;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+/* =========================
+   RESULTADOS
+========================= */
+
+.movie-results {
+  margin-bottom: 3rem;
+}
+
+.movie-results h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1.5rem;
+}
+
+/* =========================
+   CARD DO FILME
+========================= */
+
+.movie-card {
+  background-color: #222;
+
+  border: 2px solid transparent;
+  border-radius: 8px;
+
+  padding: 0;
+  overflow: hidden;
+
+  color: #fff;
+
+  cursor: pointer;
+  text-align: left;
+
+  transition: 0.3s;
+}
+
+.movie-card:hover {
+  transform: translateY(-3px);
+  border-color: #666;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.no-poster {
+  width: 100%;
+  height: 220px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #333;
+  color: #777;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.movie-info strong {
+  font-size: 0.9rem;
+}
+
+.movie-info span {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* =========================
+   DADOS DA SESSÃO
+========================= */
+
+.session-section {
+  background-color: #222;
+
+  padding: 2rem;
+
+  border-radius: 8px;
+
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+
+  margin-top: 2rem;
+}
+
+.session-section h2 {
+  margin-bottom: 1.5rem;
+}
+
+/* =========================
+   FILME SELECIONADO
+========================= */
+
+.selected-movie {
+  display: flex;
+  gap: 1.5rem;
+
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+
+  border-bottom: 1px solid #444;
+}
+
+.selected-movie img {
+  width: 100px;
+  height: 150px;
+
+  object-fit: cover;
+
+  border-radius: 6px;
+}
+
+.selected-no-poster {
+  width: 100px;
+  height: 150px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #333;
+  color: #777;
+
+  border-radius: 6px;
+}
+
+.selected-movie span {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.selected-movie h3 {
+  margin-top: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.selected-movie p {
+  color: #aaa;
+
+  max-width: 700px;
+
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+/* =========================
+   TROCAR FILME
+========================= */
+
+.change-movie-button {
+  margin-top: 1rem;
+
+  padding: 0.6rem 1rem;
+
+  border-radius: 6px;
+  border: 1px solid #555;
+
+  background-color: transparent;
+  color: #ddd;
+
+  font-size: 0.85rem;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.change-movie-button:hover {
+  background-color: #333;
+  border-color: #fff;
+  color: #fff;
+}
+
+/*FORMULÁRIO*/
+
+.session-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: #ddd;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  padding: 0.75rem;
+
+  border-radius: 6px;
+  border: 1px solid #444;
+
+  background-color: #333;
+  color: #fff;
+}
+
+.form-group input::placeholder {
+  color: #999;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #fff;
+}
+
+/*BOTÃO CRIAR*/
+
+.create-button {
+  grid-column: 1 / -1;
+
+  padding: 0.75rem;
+
+  margin-top: 0.5rem;
+
+  border-radius: 6px;
+  border: none;
+
+  background-color: #fff;
+  color: #000;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+}
+
+.create-button:hover {
+  background-color: #ddd;
+}
+
+.create-button:disabled {
+  background-color: #777;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/*MENSAGEM*/
+
+.event-message {
+  margin-top: 1.5rem;
+
+  text-align: center;
+
+  color: #ccc;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 900px) {
+  .create-event-container {
+    padding: 2rem;
+  }
+
+  .session-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .create-event-container {
+    padding: 1.5rem;
+  }
+
+  .selected-movie {
+    flex-direction: column;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

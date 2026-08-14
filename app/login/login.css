@@ -1,0 +1,144 @@
+.login-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  color: #fff;
+}
+
+/* Lado esquerdo */
+.login-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.login-card {
+  background-color: #222;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-card label {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.login-card input {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background-color: #333;
+  color: #fff;
+}
+
+.login-card input:focus {
+  outline: none;
+  border-color: #fff;
+}
+
+.login-card button {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #fff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-card button:hover {
+  background-color: #ddd;
+}
+
+/* Lado direito */
+.login-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.login-right h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.login-right p {
+  max-width: 400px;
+  color: #ccc;
+}
+
+.login-right .register-link {
+  margin-top: 1rem;
+  color: #aaa;
+}
+
+.login-right .register-link a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.message {
+  margin-top: 1rem;
+  text-align: center;
+  color: #ccc;
+}
+
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .login-left,
+  .login-right {
+    flex: none;
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .login-right h1 {
+    font-size: 1.5rem;
+  }
+
+  .login-card {
+    max-width: 100%;
+  }
+}
+
+/* 📱 Responsividade */
+
+@media (max-width: 480px) {
+  .login-right h1 {
+    font-size: 1.2rem;
+  }
+
+  .login-card {
+    padding: 1.5rem;
+  }
+
+  .login-card input,
+  .login-card button {
+    padding: 0.6rem;
+  }
+}
