@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import "./criar-eventos.css";
+import { useRouter } from "next/navigation";
 
 interface Movie {
   id: number;
@@ -27,6 +28,8 @@ export default function CreateEventPage() {
   const [message, setMessage] = useState("");
   const [searching, setSearching] = useState(false);
   const [creating, setCreating] = useState(false);
+
+  const router = useRouter();
 
   // =========================
   // BUSCA DINÂMICA DE FILMES
@@ -155,6 +158,10 @@ export default function CreateEventPage() {
         setLocation("");
         setRoom("");
         setCapacity("");
+        
+        setTimeout(() => {
+          router.push("/eventos-disponiveis");
+        }, 2000);
       }
     } catch (error) {
       console.error("Erro ao criar sessão:", error);

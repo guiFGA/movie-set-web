@@ -2,17 +2,19 @@
 
 import styles from './Navbar.module.css'
 import Link from 'next/link'
-import {FaUser} from 'react-icons/fa'
+import {FaUser, FaSignOutAlt} from 'react-icons/fa'
 import {useEffect, useState} from "react";
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 type UserRole = "CUSTOMER" | "ORGANIZER" | "GATE"
 export default function Navbar(){
 
     const [logged, setLogged] = useState(false);
     const [role, setRole] = useState<UserRole | null>(null);
+    const [name, setName] = useState<string | null>(null);
 
     const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
         async function checkAuth(){
@@ -23,20 +25,43 @@ export default function Navbar(){
                 if (res.ok && data.logged){
                     setLogged(true);
                     setRole(data.role);
-                    
+                    setName(data.name);
                 }else{
                     setLogged(false);
                     setRole(null);
+                    setName(null);
                 }
             }catch(error){
                 console.error("Erro ao verificar autenticação:", error);
                 setLogged(false);
                 setRole(null);
+                setName(null);
             }
         }
         
         checkAuth();
     }, [pathname]);
+
+    async function handleLogout(){
+        try{
+            const res = await fetch("/api/auth/logout", {
+                method: "POST",
+            });
+
+            if (!res.ok){
+                console.error("Erro ao fazer logout");
+                return;
+            }
+            setLogged(false);
+        setRole(null);
+        setName(null);
+
+        router.push("/login");
+        router.refresh();
+        } catch (error) {
+          console.error("Erro ao realizar logout:", error);
+          }
+    }
 
     return(
         <nav className={styles.navbar}>
@@ -60,7 +85,15 @@ export default function Navbar(){
                 <li><Link href="/portaria">Portaria</Link></li>)}
                 
             </ul>
-            <Link href="/login" className={styles.login}><FaUser/></Link>
+            {!logged ? (
+                <Link href="/login" className={styles.login}><FaUser/></Link>
+            ) : (
+                <button onClick={handleLogout} className={styles.logout} title="Sair">
+                    <FaUser /> <span>{name}</span>
+                    <FaSignOutAlt className={styles.logoutIcon} />
+                </button>
+            )}    
+        
             
 
         </nav>

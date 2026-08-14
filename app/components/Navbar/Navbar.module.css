@@ -72,6 +72,34 @@
   color: #030303;
 }
 
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  background: none;
+  border: none;
+
+  color: #fff;
+
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  transition: 0.3s;
+}
+
+.logout:hover {
+  color: #bbb;
+}
+
+.logout svg {
+  font-size: 1rem;
+}
+
+.logoutIcon {
+  margin-left: 0.2rem;
+}
+
 
  
 
