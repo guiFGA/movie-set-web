@@ -1,0 +1,160 @@
+.container {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem;
+
+  background: #000;
+  color: #fff;
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+
+  padding: 3rem;
+
+  text-align: center;
+
+  background: #222;
+
+  border: 1px solid #333;
+  border-radius: 12px;
+
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
+}
+
+/* ÍCONE */
+
+.successIcon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #fff;
+  border-radius: 50%;
+
+  font-size: 2rem;
+  font-weight: bold;
+
+  color: #fff;
+}
+
+/* STATUS */
+
+.status {
+  display: block;
+
+  margin-bottom: 0.7rem;
+
+  color: #888;
+
+  font-size: 0.7rem;
+  letter-spacing: 0.15rem;
+}
+
+/* TÍTULO */
+
+.card h1 {
+  margin: 0;
+
+  font-size: 2rem;
+}
+
+/* DESCRIÇÃO */
+
+.description {
+  margin: 1rem auto 2rem;
+
+  max-width: 400px;
+
+  color: #aaa;
+
+  line-height: 1.5;
+}
+
+
+/* BOTÃO PRINCIPAL */
+
+.ticketsButton {
+  width: 100%;
+
+  padding: 0.9rem;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #fff;
+  color: #000;
+
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.ticketsButton:hover {
+  background: #ddd;
+}
+
+/* BOTÃO SECUNDÁRIO */
+
+.homeButton {
+  width: 100%;
+
+  margin-top: 0.8rem;
+
+  padding: 0.9rem;
+
+  border: 1px solid #555;
+  border-radius: 6px;
+
+  background: transparent;
+  color: #aaa;
+
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.homeButton:hover {
+  background: #2d2d2d;
+  border-color: #777;
+  color: #fff;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1.2rem;
+  }
+
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .card h1 {
+    font-size: 1.6rem;
+  }
+
+  .successIcon {
+    width: 60px;
+    height: 60px;
+
+    font-size: 1.7rem;
+  }
+}

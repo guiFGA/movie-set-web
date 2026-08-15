@@ -37,6 +37,8 @@ export default function EventPage() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
+  const [reserving, setReserving] = useState(false);
+
   useEffect(() => {
     async function loadEvent() {
       try {
@@ -126,7 +128,13 @@ export default function EventPage() {
     });
   }
 
-  function handleContinue() {
+  async function handleContinue() {
+
+     if (!event) {
+    setMessage("Sessão não encontrada.");
+    return;
+    }
+
     if (selectedSeats.length === 0) {
       setMessage(
         "Selecione pelo menos um assento para continuar."
@@ -138,23 +146,42 @@ export default function EventPage() {
     console.log("Evento:", event?.id);
     console.log("Assentos:", selectedSeats);
 
-    /*
-      Mais adiante vamos trocar isso pela criação
-      da reserva no backend.
-    */
+    try {
+      setMessage("");
 
-    // Exemplo futuro:
-    //
-    // const response = await fetch("/api/reservations", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     event_id: event?.id,
-    //     seat_ids: selectedSeats,
-    //   }),
-    // });
+      const response = await fetch("/api/reservation", {
+        method: "POST",
+
+        headers: {
+        "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          event_id: event.id,
+          seat_ids: selectedSeats,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMessage(data.error || "Não foi possível realizar a reserva.");
+          return;
+      }
+
+    setMessage("Reserva criada com sucesso!");
+
+    const reservationId = data.reservation.id;
+
+    router.push(`/pagamento/${reservationId}`);
+    } catch (error) {
+      console.error("Erro ao criar reserva:", error);
+
+      setMessage(
+      "Ocorreu um erro ao tentar realizar a reserva.");
+      } finally{
+        setReserving(false);
+      }
   }
 
   if (loading) {
@@ -394,10 +421,12 @@ export default function EventPage() {
         <button
           type="button"
           className={styles.continueButton}
-          disabled={selectedSeats.length === 0}
+          disabled={selectedSeats.length === 0 || reserving}
           onClick={handleContinue}
         >
-          Continuar
+          {reserving
+            ? "Reservando..."
+            : "Continuar para pagamento"}
         </button>
       </section>
 
