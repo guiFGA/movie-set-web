@@ -130,6 +130,7 @@ export async function GET(
       ticket: {
         id: ticket.id,
         code: ticket.code,
+        qr_token: ticket.qr_token,
         status: ticket.status,
         used_at: ticket.used_at,
 

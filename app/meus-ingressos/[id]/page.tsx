@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import QRCode from "react-qr-code";
 
 interface TicketData {
   id: number;
   code: string;
+  qr_token: string;
   status: "ACTIVE" | "USED" | "CANCELLED";
   used_at: string | null;
   reservation_id: number;
@@ -38,6 +40,7 @@ export default function TicketPage() {
 
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [ticketUrl, setTicketUrl] = useState("");
 
   useEffect(() => {
     async function loadTicket() {
@@ -69,6 +72,8 @@ export default function TicketPage() {
         }
 
         setTicket(data.ticket);
+
+        
       } catch (error) {
         console.error(
           "Erro ao carregar ingresso:",
@@ -87,6 +92,17 @@ export default function TicketPage() {
       loadTicket();
     }
   }, [id, router]);
+
+  useEffect(() => {
+    if (!ticket) {
+      return;
+    }
+
+    const url =
+      `${window.location.origin}/ingresso/${ticket.qr_token}`;
+
+    setTicketUrl(url);
+  }, [ticket]);
 
   function formatDate(date: string) {
     return new Intl.DateTimeFormat("pt-BR", {
@@ -123,6 +139,21 @@ export default function TicketPage() {
       return;
     }
 
+    try{
+        if (navigator.share) {
+          await navigator.share({
+            title: `Ingresso para ${ticket.event.title}`,
+            text: `Aqui está o meu ingresso para o evento "${ticket.event.title}".`,
+            url: ticketUrl,
+          });
+          return;
+        }
+        await navigator.clipboard.writeText(ticketUrl);
+
+        setMessage("Link do ingresso copiado para a área de transferência");
+    } catch (error) {
+      console.error("Erro ao compartilhar ingresso:", error);
+    }
   }
 
   if (loading) {
@@ -158,6 +189,7 @@ export default function TicketPage() {
       </main>
     );
   }
+
 
   return (
     <main className={styles.container}>
@@ -256,7 +288,14 @@ export default function TicketPage() {
 
         <div className={styles.accessSection}>
           <div className={styles.qrPlaceholder}>
-            <span>QR CODE</span>
+            {ticketUrl && (
+              <QRCode
+                value={ticketUrl}
+                size={250}
+                bgColor="#ffffff"
+                fgColor="#000000"
+              />
+            )}
           </div>
 
           <div className={styles.codeArea}>
