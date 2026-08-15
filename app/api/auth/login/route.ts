@@ -5,7 +5,7 @@ import { User } from "../../../models/User";
 import { connectDatabase } from "../../db";
 
 export async function POST(request: NextRequest) {
-
+    //Inicia conexão com o banco de dados
     connectDatabase();
 
   try {

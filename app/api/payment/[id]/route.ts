@@ -74,7 +74,7 @@ export async function POST(
       );
     }
 
-    /* 2. ID DA RESERVA */
+    /* ID DA RESERVA */
 
     const { id } = await params;
 
@@ -97,7 +97,7 @@ export async function POST(
       );
     }
 
-    /* 3. RESULTADO SIMULADO */
+    /* RESULTADO SIMULADO */
 
     const body = await request.json();
 
@@ -164,7 +164,7 @@ export async function POST(
       );
     }
 
-    /* 5. BUSCA ASSENTOS */
+    /*  BUSCA ASSENTOS */
 
     const reservationSeats =
       await ReservationSeat.findAll({
@@ -234,7 +234,7 @@ export async function POST(
       });
     }
 
-    /* 8. PAGAMENTO APROVADO */
+    /* PAGAMENTO APROVADO */
 
     reservation.status =
       ReservationStatus.CONFIRMED;
@@ -243,7 +243,7 @@ export async function POST(
       transaction,
     });
 
-    /* 9. CRIAR TICKETS */
+    /* CRIAR TICKETS */
 
     const tickets = [];
 
