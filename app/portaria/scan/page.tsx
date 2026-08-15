@@ -1,12 +1,19 @@
-"use client";
-
-import { Suspense } from "react";
 import ScannerContent from "./ScannerContent";
 
-export default function GateScannerPage() {
+interface GateScannerPageProps {
+  searchParams: Promise<{
+    event?: string;
+  }>;
+}
+
+export default async function GateScannerPage({
+  searchParams,
+}: GateScannerPageProps) {
+  const { event } = await searchParams;
+
   return (
-    <Suspense fallback={<p>Carregando scanner...</p>}>
-      <ScannerContent />
-    </Suspense>
+    <ScannerContent
+      eventId={event ?? null}
+    />
   );
 }
