@@ -8,10 +8,8 @@ import { Ticket } from "./Ticket";
 import { TicketValidation } from "./Ticket_validation";
 
 export function setupAssociations() {
-  // =========================
-  // USER -> EVENT
-  // =========================
-
+ 
+  
   User.hasMany(Event, {
     foreignKey: "organizer_id",
     as: "events",
@@ -21,10 +19,6 @@ export function setupAssociations() {
     foreignKey: "organizer_id",
     as: "organizer",
   });
-
-  // =========================
-  // EVENT -> SEAT
-  // =========================
 
   Event.hasMany(Seat, {
     foreignKey: "event_id",
@@ -36,10 +30,6 @@ export function setupAssociations() {
     as: "event",
   });
 
-  // =========================
-  // USER -> RESERVATION
-  // =========================
-
   User.hasMany(Reservation, {
     foreignKey: "customer_id",
     as: "reservations",
@@ -50,9 +40,6 @@ export function setupAssociations() {
     as: "customer",
   });
 
-  // =========================
-  // EVENT -> RESERVATION
-  // =========================
 
   Event.hasMany(Reservation, {
     foreignKey: "event_id",
@@ -64,9 +51,6 @@ export function setupAssociations() {
     as: "event",
   });
 
-  // =========================
-  // RESERVATION -> RESERVATION SEAT
-  // =========================
 
   Reservation.hasMany(ReservationSeat, {
     foreignKey: "reservation_id",
@@ -78,9 +62,6 @@ export function setupAssociations() {
     as: "reservation",
   });
 
-  // =========================
-  // SEAT -> RESERVATION SEAT
-  // =========================
 
   Seat.hasOne(ReservationSeat, {
     foreignKey: "seat_id",
@@ -92,9 +73,6 @@ export function setupAssociations() {
     as: "seat",
   });
 
-  // =========================
-  // RESERVATION <-> SEATS
-  // =========================
 
   Reservation.belongsToMany(Seat, {
     through: ReservationSeat,
@@ -110,9 +88,6 @@ export function setupAssociations() {
     as: "reservations",
   });
 
-  // =========================
-  // RESERVATION -> PAYMENT
-  // =========================
 
   Reservation.hasOne(Payment, {
     foreignKey: "reservation_id",
@@ -124,9 +99,6 @@ export function setupAssociations() {
     as: "reservation",
   });
 
-  // =========================
-  // RESERVATION -> TICKETS
-  // =========================
 
   Reservation.hasMany(Ticket, {
     foreignKey: "reservation_id",
@@ -138,10 +110,6 @@ export function setupAssociations() {
     as: "reservation",
   });
 
-  // =========================
-  // SEAT -> TICKET
-  // =========================
-
   Seat.hasOne(Ticket, {
     foreignKey: "seat_id",
     as: "ticket",
@@ -152,9 +120,6 @@ export function setupAssociations() {
     as: "seat",
   });
 
-  // =========================
-  // TICKET -> VALIDATIONS
-  // =========================
 
   Ticket.hasMany(TicketValidation, {
     foreignKey: "ticket_id",
@@ -166,10 +131,6 @@ export function setupAssociations() {
     as: "ticket",
   });
 
-  // =========================
-  // USER GATE -> VALIDATIONS
-  // =========================
-
   User.hasMany(TicketValidation, {
     foreignKey: "gate_user_id",
     as: "ticketValidations",
@@ -180,9 +141,6 @@ export function setupAssociations() {
     as: "gateUser",
   });
 
-  // =========================
-  // EVENT -> VALIDATIONS
-  // =========================
 
   Event.hasMany(TicketValidation, {
     foreignKey: "event_id",
