@@ -14,7 +14,7 @@ interface TicketAttributes {
   reservation_id: number;
   seat_id: number;
   code: string;
-  qr_token_hash: string;
+  qr_token: string;
   status: TicketStatus;
   used_at: Date | null;
 }
@@ -33,7 +33,7 @@ class Ticket
   declare reservation_id: number;
   declare seat_id: number;
   declare code: string;
-  declare qr_token_hash: string;
+  declare qr_token: string;
   declare status: TicketStatus;
   declare used_at: Date | null;
 }
@@ -71,7 +71,7 @@ Ticket.init(
       unique: true,
     },
 
-    qr_token_hash: {
+    qr_token: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,

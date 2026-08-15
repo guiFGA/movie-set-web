@@ -261,20 +261,13 @@ export async function POST(
         .randomBytes(32)
         .toString("hex");
 
-      /* Guarda somente o hash no banco */
-
-      const qrTokenHash = crypto
-        .createHash("sha256")
-        .update(qrToken)
-        .digest("hex");
-
       const ticket = await Ticket.create(
         { 
           reservation_id: reservation.id,
           seat_id: reservationSeat.seat_id,
 
           code,
-          qr_token_hash: qrTokenHash,
+          qr_token: qrToken,
 
           status: TicketStatus.ACTIVE,
           used_at: null,
