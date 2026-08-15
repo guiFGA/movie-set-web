@@ -1,10 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Html5Qrcode } from "html5-qrcode";
 
 import styles from "./page.module.css";
+
+interface ScannerContentProps {
+  eventId: string | null;
+}
 
 type ValidationStatus =
   | "VALID"
@@ -19,17 +23,15 @@ interface ValidationResult {
   error?: string;
 }
 
-export default function ScannerContent() {
-  const searchParams = useSearchParams();
+export default function ScannerContent({
+  eventId,
+}: ScannerContentProps) {
   const router = useRouter();
-
-  const eventId = searchParams.get("event");
 
   const scannerRef = useRef<Html5Qrcode | null>(null);
 
   const [scanning, setScanning] = useState(false);
   const [validating, setValidating] = useState(false);
-
   const [result, setResult] =
     useState<ValidationResult | null>(null);
 
@@ -37,9 +39,7 @@ export default function ScannerContent() {
 
   useEffect(() => {
     if (!eventId) {
-      setMessage(
-        "Nenhuma sessão foi selecionada."
-      );
+      setMessage("Nenhuma sessão foi selecionada.");
       return;
     }
 
@@ -54,15 +54,25 @@ export default function ScannerContent() {
     try {
       setMessage("");
 
+      const cameras = await Html5Qrcode.getCameras();
+
+      if (!cameras || cameras.length === 0) {
+        setMessage(
+          "Nenhuma câmera foi encontrada neste dispositivo."
+        );
+        return;
+      }
+
+      const selectedCamera =
+        cameras[cameras.length - 1];
+
       const scanner =
         new Html5Qrcode("qr-reader");
 
       scannerRef.current = scanner;
 
       await scanner.start(
-        {
-          facingMode: "environment",
-        },
+        selectedCamera.id,
         {
           fps: 10,
           qrbox: {
@@ -91,18 +101,13 @@ export default function ScannerContent() {
 
   async function stopScanner() {
     try {
-      const scanner =
-        scannerRef.current;
+      const scanner = scannerRef.current;
 
-      if (
-        scanner &&
-        scanner.isScanning
-      ) {
+      if (scanner && scanner.isScanning) {
         await scanner.stop();
       }
 
       scannerRef.current = null;
-
       setScanning(false);
     } catch (error) {
       console.error(
@@ -146,8 +151,7 @@ export default function ScannerContent() {
           method: "POST",
 
           headers: {
-            "Content-Type":
-              "application/json",
+            "Content-Type": "application/json",
           },
 
           body: JSON.stringify({
@@ -157,8 +161,7 @@ export default function ScannerContent() {
         }
       );
 
-      const data =
-        await response.json();
+      const data = await response.json();
 
       setResult(data);
     } catch (error) {
@@ -214,6 +217,8 @@ export default function ScannerContent() {
     await startScanner();
   }
 
+  // IMPORTANTE:
+  // ESTE RETURN PRECISA ESTAR DENTRO DA FUNÇÃO
   return (
     <main className={styles.container}>
       <header className={styles.header}>
@@ -222,8 +227,8 @@ export default function ScannerContent() {
         <h1>Leitura de QR Code</h1>
 
         <p>
-          Posicione o QR Code do ingresso
-          dentro da área da câmera.
+          Posicione o QR Code do ingresso dentro
+          da área da câmera.
         </p>
       </header>
 
@@ -259,17 +264,13 @@ export default function ScannerContent() {
                     : styles.invalid
             }`}
           >
-            <span>
-              {result.status}
-            </span>
+            <span>{result.status}</span>
 
             <h2>
-              {result.status ===
-                "VALID" &&
+              {result.status === "VALID" &&
                 "Ingresso válido"}
 
-              {result.status ===
-                "INVALID" &&
+              {result.status === "INVALID" &&
                 "Ingresso inválido"}
 
               {result.status ===
@@ -288,9 +289,7 @@ export default function ScannerContent() {
 
             <button
               type="button"
-              onClick={
-                handleScanAgain
-              }
+              onClick={handleScanAgain}
             >
               Ler próximo ingresso
             </button>
