@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import { User } from "@/app/models/User";
+
+type UserRole = "CUSTOMER" | "ORGANIZER" | "GATE";
 
 interface JwtPayload {
   id: number;
-  role: "CUSTOMER" | "ORGANIZER" | "GATE";
+  role: UserRole;
 }
 
 export async function GET(request: NextRequest) {
@@ -14,6 +17,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         logged: false,
         role: null,
+        name: null,
       });
     }
 
@@ -28,10 +32,25 @@ export async function GET(request: NextRequest) {
       jwtSecret
     ) as JwtPayload;
 
+    const user = await User.findByPk(decoded.id);
+
+    if (!user) {
+      return NextResponse.json({
+        logged: false,
+        role: null,
+        name: null,
+      },
+      {
+        status: 404,
+       }
+      );
+    }
+
     return NextResponse.json({
       logged: true,
-      userId: decoded.id,
-      role: decoded.role,
+      userId: user.id,
+      role: user.role,
+      name: user.name,
     });
 
   } catch {
@@ -39,6 +58,7 @@ export async function GET(request: NextRequest) {
       {
         logged: false,
         role: null,
+        name: null,
       },
       {
         status: 401,

@@ -1,0 +1,325 @@
+.container {
+  min-height: 100vh;
+  padding: 3rem 6rem;
+  color: #fff;
+}
+
+.header {
+  margin-bottom: 2.5rem;
+}
+
+.header > span {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: #777;
+  font-size: 0.7rem;
+  letter-spacing: 0.15rem;
+}
+
+.header h1 {
+  margin: 0 0 0.6rem;
+  font-size: 2.2rem;
+}
+
+.header p {
+  margin: 0;
+  color: #999;
+}
+
+.ticketGrid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(520px, 1fr)
+  );
+
+  gap: 1.5rem;
+}
+
+.ticketCard {
+  display: flex;
+
+  min-height: 270px;
+
+  overflow: hidden;
+
+  background: #222;
+
+  border: 1px solid #333;
+  border-radius: 10px;
+
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.05);
+
+  transition: 0.25s;
+}
+
+.ticketCard:hover {
+  transform: translateY(-3px);
+
+  border-color: #555;
+
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.08);
+}
+
+.poster {
+  width: 180px;
+  min-width: 180px;
+
+  background: #333;
+}
+
+.poster img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.noPoster {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #777;
+}
+
+.ticketContent {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 1.5rem;
+}
+
+.ticketTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.ticketLabel {
+  color: #777;
+
+  font-size: 0.65rem;
+  letter-spacing: 0.12rem;
+}
+
+.ticketTop h2 {
+  margin: 0.4rem 0 0;
+
+  font-size: 1.3rem;
+}
+
+.status {
+  padding: 0.4rem 0.7rem;
+
+  border-radius: 20px;
+
+  font-size: 0.7rem;
+  font-weight: bold;
+
+  white-space: nowrap;
+}
+
+.active {
+  background: #fff;
+  color: #000;
+}
+
+.used {
+  background: #444;
+  color: #bbb;
+}
+
+.cancelled {
+  background: #181818;
+  color: #666;
+
+  border: 1px solid #333;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 1rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.details div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.3rem;
+}
+
+.details span,
+.code span {
+  color: #777;
+
+  font-size: 0.7rem;
+}
+
+.details strong {
+  color: #ddd;
+
+  font-size: 0.85rem;
+}
+
+.seatNumber {
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.ticketBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 1rem;
+
+  margin-top: auto;
+  padding-top: 1.2rem;
+
+  border-top: 1px solid #383838;
+}
+
+.code {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.3rem;
+}
+
+.code strong {
+  font-size: 0.85rem;
+  letter-spacing: 0.08rem;
+}
+
+.ticketButton {
+  padding: 0.75rem 1.2rem;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #fff;
+  color: #000;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.ticketButton:hover {
+  background: #ddd;
+}
+
+.empty {
+  max-width: 600px;
+
+  margin: 5rem auto;
+
+  padding: 3rem;
+
+  text-align: center;
+
+  background: #222;
+
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+.empty h2 {
+  margin-bottom: 0.8rem;
+}
+
+.empty p {
+  margin-bottom: 1.5rem;
+
+  color: #999;
+}
+
+.empty button {
+  padding: 0.85rem 1.3rem;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #fff;
+  color: #000;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.message {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+
+  background: #222;
+
+  border: 1px solid #444;
+  border-radius: 6px;
+
+  color: #ddd;
+}
+
+.loading {
+  padding-top: 5rem;
+
+  text-align: center;
+
+  color: #aaa;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+  .container {
+    padding: 2rem;
+  }
+
+  .ticketGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .container {
+    padding: 1.2rem;
+  }
+
+  .ticketCard {
+    flex-direction: column;
+  }
+
+  .poster {
+    width: 100%;
+    height: 350px;
+  }
+
+  .details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ticketBottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ticketButton {
+    width: 100%;
+  }
+}

@@ -1,0 +1,443 @@
+.container {
+  min-height: 100vh;
+  padding: 3rem 6rem;
+  color: #fff;
+  background: #000;
+}
+
+/* CABEÇALHO */
+
+.eventHeader {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.05);
+}
+
+.poster {
+  width: 220px;
+  min-width: 220px;
+  height: 330px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #333;
+}
+
+.poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.noPoster {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}
+
+.eventInfo {
+  flex: 1;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15rem;
+  color: #888;
+}
+
+.eventInfo h1 {
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+}
+
+.description {
+  max-width: 900px;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  color: #aaa;
+}
+
+.sessionDetails {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.sessionDetails div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem;
+  background: #292929;
+  border: 1px solid #383838;
+  border-radius: 6px;
+}
+
+.sessionDetails span {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.sessionDetails strong {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+/* MAPA DE ASSENTOS */
+
+.seatSection {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.05);
+}
+
+.seatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.seatHeader h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+/* LEGENDA */
+
+.legend {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.legend div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.legendSeat {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.availableLegend {
+  background: #3a3a3a;
+  border: 1px solid #666;
+}
+
+.selectedLegend {
+  background: #fff;
+  border: 1px solid #fff;
+}
+
+.unavailableLegend {
+  background: #111;
+  border: 1px solid #222;
+}
+
+/* TELA DO CINEMA */
+
+.screenArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.screen {
+  width: 70%;
+  max-width: 700px;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.3rem;
+  color: #111;
+  background: #ddd;
+  border-radius: 100% 100% 8px 8px;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+}
+
+.screenArea span {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+/* ASSENTOS */
+
+.seats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.seatRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rowSeats {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.rowLabel {
+  width: 20px;
+  text-align: center;
+  color: #777;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.seat {
+  width: 42px;
+  height: 38px;
+  border: 1px solid #555;
+  border-radius: 7px 7px 4px 4px;
+  background: #333;
+  color: #ddd;
+  cursor: pointer;
+  font-size: 0.78rem;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.seat:hover:not(:disabled) {
+  transform: translateY(-3px);
+  background: #444;
+  border-color: #888;
+}
+
+.selectedSeat {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.selectedSeat:hover:not(:disabled) {
+  background: #eee;
+}
+
+.unavailableSeat {
+  background: #111;
+  color: #444;
+  border-color: #222;
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+/* RESUMO */
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+.summaryInfo {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.summaryInfo div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.summaryInfo span {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.summaryInfo strong {
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.summaryInfo .total {
+  font-size: 1.3rem;
+}
+
+/* BOTÃO CONTINUAR */
+
+.continueButton {
+  min-width: 160px;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background: #fff;
+  color: #000;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.continueButton:hover:not(:disabled) {
+  background: #ddd;
+  transform: translateY(-1px);
+}
+
+.continueButton:disabled {
+  background: #555;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* MENSAGENS */
+
+.message {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background: #222;
+  color: #ddd;
+}
+
+.loading {
+  padding-top: 5rem;
+  text-align: center;
+  color: #aaa;
+}
+
+.error {
+  max-width: 600px;
+  margin: 5rem auto 0;
+  padding: 2rem;
+  text-align: center;
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+.error h1 {
+  margin-bottom: 1rem;
+}
+
+.error p {
+  margin-bottom: 1.5rem;
+  color: #aaa;
+}
+
+.error button {
+  padding: 0.8rem 1.3rem;
+  border: none;
+  border-radius: 6px;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 1100px) {
+  .container {
+    padding: 2rem;
+  }
+
+  .sessionDetails {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .eventHeader {
+    flex-direction: column;
+  }
+
+  .poster {
+    width: 180px;
+    min-width: 180px;
+    height: 270px;
+  }
+
+  .sessionDetails {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .seatHeader {
+    flex-direction: column;
+  }
+
+  .summary {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .continueButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1.2rem;
+  }
+
+  .eventHeader,
+  .seatSection,
+  .summary {
+    padding: 1.3rem;
+  }
+
+  .eventInfo h1 {
+    font-size: 1.5rem;
+  }
+
+  .sessionDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryInfo {
+    gap: 1.5rem;
+  }
+
+  .seat {
+    width: 36px;
+    height: 34px;
+  }
+
+  .rowSeats {
+    gap: 0.4rem;
+  }
+
+  .screen {
+    width: 90%;
+  }
+}
