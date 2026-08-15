@@ -95,7 +95,7 @@ export default function EventsPage() {
       return;
     }
 
-    router.push(`/eventos-disponiveis/${eventId}`);
+    router.push(`/eventos/${eventId}`);
   }
 
   function formatDate(date: string) {

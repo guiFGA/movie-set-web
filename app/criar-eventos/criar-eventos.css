@@ -4,9 +4,7 @@
   color: #fff;
 }
 
-/* =========================
-   CABEÇALHO
-========================= */
+/* CABEÇALHO */
 
 .create-event-header {
   margin-bottom: 2.5rem;
@@ -21,9 +19,7 @@
   color: #aaa;
 }
 
-/* =========================
-   PESQUISA
-========================= */
+/* PESQUISA */
 
 .movie-search-section {
   max-width: 700px;
@@ -67,9 +63,7 @@
   font-size: 0.85rem;
 }
 
-/* =========================
-   RESULTADOS
-========================= */
+/* RESULTADOS */
 
 .movie-results {
   margin-bottom: 3rem;
@@ -86,9 +80,7 @@
   gap: 1.5rem;
 }
 
-/* =========================
-   CARD DO FILME
-========================= */
+/* CARD DO FILME */
 
 .movie-card {
   background-color: #222;
@@ -147,9 +139,7 @@
   color: #888;
 }
 
-/* =========================
-   DADOS DA SESSÃO
-========================= */
+/* DADOS DA SESSÃO */
 
 .session-section {
   background-color: #222;
@@ -167,9 +157,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* =========================
-   FILME SELECIONADO
-========================= */
+/* FILME SELECIONADO */
 
 .selected-movie {
   display: flex;
@@ -223,9 +211,7 @@
   font-size: 0.9rem;
 }
 
-/* =========================
-   TROCAR FILME
-========================= */
+/* TROCAR FILME */
 
 .change-movie-button {
   margin-top: 1rem;
@@ -321,7 +307,7 @@
   cursor: not-allowed;
 }
 
-/*MENSAGEM*/
+/* MENSAGEM  */
 
 .event-message {
   margin-top: 1.5rem;
@@ -331,9 +317,7 @@
   color: #ccc;
 }
 
-/* =========================
-   RESPONSIVIDADE
-========================= */
+/* RESPONSIVIDADE */
 
 @media (max-width: 900px) {
   .create-event-container {
