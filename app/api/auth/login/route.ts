@@ -6,7 +6,7 @@ import { connectDatabase } from "../../db";
 
 export async function POST(request: NextRequest) {
     //Inicia conexão com o banco de dados
-    connectDatabase();
+    await connectDatabase();
 
   try {
     const { email, password } = await request.json();
@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
 
     response.cookies.set("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "development",
+      secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       maxAge: 60 * 60,
       path: "/",

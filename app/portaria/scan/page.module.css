@@ -1,0 +1,344 @@
+.container {
+  min-height: 100vh;
+  padding: 3rem 6rem;
+  color: #fff;
+}
+
+/* CABEÇALHO */
+
+.header {
+  max-width: 760px;
+  margin: 0 auto 2rem;
+}
+
+.header > span {
+  display: block;
+  margin-bottom: 0.5rem;
+
+  color: #777;
+
+  font-size: 0.7rem;
+  letter-spacing: 0.15rem;
+}
+
+.header h1 {
+  margin: 0 0 0.5rem;
+
+  font-size: 2.1rem;
+}
+
+.header p {
+  margin: 0;
+
+  color: #999;
+
+  line-height: 1.5;
+}
+
+/* CARD DO SCANNER */
+
+.scannerCard {
+  max-width: 760px;
+
+  margin: 0 auto;
+
+  padding: 2rem;
+
+  background: #222;
+
+  border: 1px solid #333;
+  border-radius: 12px;
+
+  box-shadow:
+    0 0 22px
+    rgba(255, 255, 255, 0.05);
+}
+
+/* ÁREA DA CÂMERA */
+
+.reader {
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #111;
+
+  border: 1px solid #444;
+  border-radius: 10px;
+}
+
+/* html5-qrcode cria vários elementos internos automaticamente */
+
+.reader video {
+  width: 100%;
+
+  border-radius: 8px;
+}
+
+/* Remove algumas bordas padrão geradas pela biblioteca */
+.reader > div {
+  border: none;
+}
+
+/* STATUS DA LEITURA */
+
+.status {
+  margin-top: 1.5rem;
+
+  padding: 1rem;
+
+  text-align: center;
+
+  background: #292929;
+
+  border: 1px solid #383838;
+  border-radius: 6px;
+
+  color: #aaa;
+
+  font-size: 0.85rem;
+}
+
+/* RESULTADO */
+
+.result {
+  padding: 2.5rem 2rem;
+
+  text-align: center;
+
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+.result > span {
+  display: block;
+
+  margin-bottom: 0.6rem;
+
+  font-size: 0.7rem;
+  font-weight: bold;
+
+  letter-spacing: 0.15rem;
+}
+
+.result h2 {
+  margin: 0 0 0.7rem;
+
+  font-size: 1.8rem;
+}
+
+.result p {
+  margin: 0 auto 2rem;
+
+  max-width: 450px;
+
+  line-height: 1.5;
+}
+
+/* RESULTADO VÁLIDO */
+
+.valid {
+  background: #f5f5f5;
+
+  border-color: #fff;
+
+  color: #000;
+}
+
+.valid p {
+  color: #444;
+}
+
+/* JÁ UTILIZADO */
+
+.used {
+  background: #292929;
+
+  border-color: #777;
+
+  color: #ddd;
+}
+
+.used p {
+  color: #aaa;
+}
+
+/* EVENTO ERRADO */
+
+.wrong {
+  background: #1c1c1c;
+
+  border-color: #666;
+
+  color: #ddd;
+}
+
+.wrong p {
+  color: #999;
+}
+
+/* INVÁLIDO */
+
+.invalid {
+  background: #181818;
+
+  border-color: #444;
+
+  color: #aaa;
+}
+
+.invalid p {
+  color: #888;
+}
+
+/* BOTÃO NOVA LEITURA */
+
+.result button {
+  width: 100%;
+
+  padding: 0.9rem 1.2rem;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #fff;
+  color: #000;
+
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.result button:hover {
+  background: #ddd;
+}
+
+/* Se o fundo do resultado já for branco */
+.valid button {
+  background: #111;
+  color: #fff;
+}
+
+.valid button:hover {
+  background: #333;
+}
+
+/* MENSAGEM DE ERRO */
+
+.message {
+  max-width: 760px;
+
+  margin: 1.5rem auto 0;
+
+  padding: 1rem;
+
+  background: #222;
+
+  border: 1px solid #444;
+  border-radius: 6px;
+
+  color: #ddd;
+
+  text-align: center;
+}
+
+/* BOTÃO VOLTAR */
+
+.backButton {
+  display: block;
+
+  width: 100%;
+  max-width: 760px;
+
+  margin: 1rem auto 0;
+
+  padding: 0.9rem;
+
+  background: transparent;
+  color: #aaa;
+
+  border: 1px solid #444;
+  border-radius: 6px;
+
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.backButton:hover {
+  background: #222;
+
+  border-color: #666;
+
+  color: #fff;
+}
+
+/* HTML5-QRCODE */
+
+.reader button {
+  padding: 0.6rem 1rem;
+
+  background: #fff;
+  color: #000;
+
+  border: none;
+  border-radius: 5px;
+
+  font-weight: bolder;
+
+  cursor: pointer;
+}
+
+.reader select {
+  padding: 0.5rem;
+
+  background: #333;
+  color: #fff;
+
+  border: 1px solid #555;
+  border-radius: 5px;
+}
+
+.reader a {
+  color: #aaa;
+}
+
+.reader span {
+  color: #aaa;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+  .container {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1.2rem;
+  }
+
+  .scannerCard {
+    padding: 1.2rem;
+  }
+
+  .header h1 {
+    font-size: 1.7rem;
+  }
+
+  .result {
+    padding: 2rem 1.2rem;
+  }
+
+  .result h2 {
+    font-size: 1.5rem;
+  }
+}
