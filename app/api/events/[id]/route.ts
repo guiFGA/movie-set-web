@@ -71,6 +71,47 @@ export async function GET(
       );
     }
 
+    //liberar reservas pendentes que expiraram
+    const expiredReservations = await Reservation.findAll({
+      where: {
+        event_id: event.id,
+        status: ReservationStatus.PENDING,
+
+        expires_at: {
+          [Op.lt]: new Date(),
+        },
+      },
+
+      attributes: ["id"],
+    });
+    const expiredReservationIds = expiredReservations.map(
+      (reservation) => reservation.id
+    );
+
+    if (expiredReservationIds.length > 0) {
+      await ReservationSeat.destroy({
+        where: {
+          reservation_id: {
+            [Op.in]: expiredReservationIds,
+          },
+        },
+      });
+
+      await Reservation.update(
+        {
+          status: ReservationStatus.CANCELLED,
+        },
+        {
+          where: {
+            id: {
+              [Op.in]: expiredReservationIds,
+            },
+          },
+        }
+      );
+    }
+    
+
 
     // Busca todos os assentos dessa sessão
     const seats = await Seat.findAll({
