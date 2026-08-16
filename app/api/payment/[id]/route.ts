@@ -164,6 +164,41 @@ export async function POST(
       );
     }
 
+    /*VERIFICA SE A RESERVA ESTÁ EXPIRADA*/
+    if (
+      reservation.expires_at &&
+      new Date(reservation.expires_at).getTime() <= Date.now()
+    ) {
+      reservation.status = ReservationStatus.CANCELLED;
+
+      await reservation.save({
+        transaction,
+      });
+
+      await ReservationSeat.destroy({
+        where: {
+          reservation_id: reservation.id,
+        },
+
+        transaction,
+      });
+
+      await transaction.commit();
+
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "Sua reserva expirou, selecione os assentos novamente",
+          expired: true,
+          event_id: reservation.event_id,
+        },
+        {
+          status: 409,
+        }
+      );
+    }
+
     /*  BUSCA ASSENTOS */
 
     const reservationSeats =

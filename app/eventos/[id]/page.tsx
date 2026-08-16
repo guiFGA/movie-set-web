@@ -24,6 +24,18 @@ interface Seat {
   available: boolean;
 }
 
+interface OrganizerStats {
+  soldSeats: number;
+  revenue: number;
+}
+
+interface EventResponse {
+  success: boolean;
+  event: EventData;
+  seats: Seat[];
+  organizerStats: OrganizerStats | null;
+}
+
 export default function EventPage() {
   const params = useParams();
   const router = useRouter();
@@ -39,6 +51,8 @@ export default function EventPage() {
 
   const [reserving, setReserving] = useState(false);
 
+  const [organizerStats, setOrganizerStats] = useState<OrganizerStats | null>(null);
+
   useEffect(() => {
     async function loadEvent() {
       try {
@@ -50,6 +64,8 @@ export default function EventPage() {
         });
 
         const data = await response.json();
+
+        setOrganizerStats(data.organizerStats ?? null);
 
         if (!response.ok) {
           setMessage(data.error || "Erro ao carregar sessão");
@@ -75,6 +91,9 @@ export default function EventPage() {
   }, [id]);
 
   function handleSeatClick(seat: Seat) {
+    if(organizerStats) {
+      return;
+    }
     if (!seat.available) {
       return;
     }
@@ -282,6 +301,89 @@ export default function EventPage() {
         </div>
       </section>
 
+        {organizerStats && event && (
+          <section
+            className={styles.organizerSection}
+          >
+            <div
+              className={styles.organizerHeader}
+            >
+              <span>
+                VISÃO DO ORGANIZADOR
+              </span>
+
+              <h2>
+                Desempenho da sessão
+              </h2>
+            </div>
+
+            <div
+              className={styles.statsGrid}
+            >
+              <div
+                className={styles.statCard}
+              >
+                <span>
+                  Assentos vendidos
+                </span>
+
+                <strong>
+                  {organizerStats.soldSeats}
+                </strong>
+
+                <small>
+                  de {event.capacity} lugares
+                </small>
+              </div>
+
+              <div
+                className={styles.statCard}
+              >
+                <span>
+                  Receita total
+                </span>
+
+                <strong>
+                  {organizerStats.revenue.toLocaleString(
+                    "pt-BR",
+                    {
+                      style: "currency",
+                      currency: "BRL",
+                    }
+                  )}
+                </strong>
+
+                <small>
+                  pagamentos aprovados
+                </small>
+              </div>
+
+              <div
+                className={styles.statCard}
+              >
+                <span>
+                  Ocupação
+                </span>
+
+                <strong>
+                  {event.capacity > 0
+                    ? (
+                        (organizerStats.soldSeats /
+                          event.capacity) *
+                        100
+                      ).toFixed(0)
+                    : 0}
+                  %
+                </strong>
+
+                <small>
+                  da capacidade total
+                </small>
+              </div>
+            </div>
+          </section>
+        )}
+
       <section className={styles.seatSection}>
         <div className={styles.seatHeader}>
           <div>
@@ -325,7 +427,8 @@ export default function EventPage() {
             Frente da sala
           </span>
         </div>
-
+        
+ 
         <div className={styles.seats}>
           {Array.from(
             new Set(seats.map((seat) => seat.row))
@@ -352,7 +455,7 @@ export default function EventPage() {
                       <button
                         key={seat.id}
                         type="button"
-                        disabled={!seat.available}
+                        disabled={!seat.available || !!organizerStats}
                         onClick={() =>
                           handleSeatClick(seat)
                         }
@@ -386,6 +489,7 @@ export default function EventPage() {
         </div>
       </section>
 
+    {!organizerStats ? (
       <section className={styles.summary}>
         <div className={styles.summaryInfo}>
           <div>
@@ -429,6 +533,12 @@ export default function EventPage() {
             : "Continuar para pagamento"}
         </button>
       </section>
+    ) : (
+      <div className={styles.organizerNotice}>
+        Você está visualizando esta sessão como organizador.
+        Os assentos estão disponíveis apenas para consulta.
+      </div>
+    )}
 
       {message && (
         <p className={styles.message}>

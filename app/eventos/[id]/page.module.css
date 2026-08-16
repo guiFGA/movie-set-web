@@ -318,6 +318,139 @@
   cursor: not-allowed;
 }
 
+/* ESTATÍSTICAS DO ORGANIZADOR */
+
+.organizerSection {
+  width: 100%;
+
+  margin: 35px 0;
+
+  padding: 24px;
+
+  border: 1px solid #333;
+  border-radius: 12px;
+
+  background: #181818;
+}
+
+.organizerHeader {
+  margin-bottom: 20px;
+}
+
+.organizerHeader span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #8f8f8f;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1.8px;
+}
+
+.organizerHeader h2 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.statsGrid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 16px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  min-height: 130px;
+
+  padding: 20px;
+
+  border: 1px solid #333;
+  border-radius: 10px;
+
+  background: #222;
+}
+
+.statCard span {
+  color: #999;
+
+  font-size: 13px;
+}
+
+.statCard strong {
+  color: #fff;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  line-height: 1.1;
+}
+
+.statCard small {
+  margin-top: auto;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+.organizerNotice {
+  width: 100%;
+
+  margin-top: 28px;
+
+  padding: 16px 20px;
+
+  border: 1px solid #333;
+  border-radius: 10px;
+
+  background: #171717;
+
+  color: #999;
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* MENSAGEM DE ORGANIZADOR */
+
+.organizerNotice {
+  margin-top: 28px;
+
+  padding: 16px 20px;
+
+  border: 1px solid #333;
+  border-radius: 10px;
+
+  background: #171717;
+
+  color: #999;
+
+  font-size: 14px;
+  text-align: center;
+}
+
+
+
 /* MENSAGENS */
 
 .message {

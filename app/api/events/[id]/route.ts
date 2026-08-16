@@ -1,12 +1,19 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { Op } from "sequelize";
 
 import { Event, EventStatus } from "@/app/models/Event";
 import { Seat } from "@/app/models/Seat";
 import { ReservationSeat } from "@/app/models/Reservation_seat";
+import { Reservation, ReservationStatus } from "../../../models/Reservation";
+import jwt from "jsonwebtoken";
+
+interface JwtPayload {
+  id: number;
+  role: string;
+}
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
@@ -38,6 +45,7 @@ export async function GET(
 
       attributes: [
         "id",
+        "organizer_id",
         "tmdb_id",
         "title",
         "description",
@@ -62,6 +70,48 @@ export async function GET(
         }
       );
     }
+
+    //liberar reservas pendentes que expiraram
+    const expiredReservations = await Reservation.findAll({
+      where: {
+        event_id: event.id,
+        status: ReservationStatus.PENDING,
+
+        expires_at: {
+          [Op.lt]: new Date(),
+        },
+      },
+
+      attributes: ["id"],
+    });
+    const expiredReservationIds = expiredReservations.map(
+      (reservation) => reservation.id
+    );
+
+    if (expiredReservationIds.length > 0) {
+      await ReservationSeat.destroy({
+        where: {
+          reservation_id: {
+            [Op.in]: expiredReservationIds,
+          },
+        },
+      });
+
+      await Reservation.update(
+        {
+          status: ReservationStatus.CANCELLED,
+        },
+        {
+          where: {
+            id: {
+              [Op.in]: expiredReservationIds,
+            },
+          },
+        }
+      );
+    }
+    
+
 
     // Busca todos os assentos dessa sessão
     const seats = await Seat.findAll({
@@ -103,6 +153,70 @@ export async function GET(
       available: !reservedSeatIds.has(seat.id),
     }));
 
+    let organizerStats: {
+          soldSeats: number;
+          revenue: number;
+        } | null = null;
+
+    const token = request.cookies.get("token")?.value;
+
+    if (token && process.env.JWT_SECRET) {
+      try {
+        const decoded = jwt.verify(
+          token,
+          process.env.JWT_SECRET
+        ) as JwtPayload;
+      
+        const isEventOwner =
+          decoded.role === "ORGANIZER" &&
+          decoded.id === event.organizer_id;
+
+        if (isEventOwner) {
+          const confirmedReservations =
+            await Reservation.findAll({
+              where: {
+                event_id: event.id,
+                status: ReservationStatus.CONFIRMED,
+              },
+
+              attributes: ["id", "total_price"],
+            });
+
+          const reservationIds = confirmedReservations.map(
+            (reservation) => reservation.id
+          );
+
+          let soldSeats = 0;
+
+          if (reservationIds.length > 0) {
+            soldSeats = await ReservationSeat.count({
+              where: {
+                reservation_id: {
+                  [Op.in]: reservationIds,
+                },
+              },
+            });
+          }
+
+          const revenue = confirmedReservations.reduce(
+            (total, reservation) => {
+              return total + Number(reservation.total_price);
+            },
+            0
+          );
+
+          organizerStats = {
+            soldSeats,
+            revenue,
+          };
+        }
+      } catch (error) {
+        console.log(
+          "Token inválido ao verificar estatísticas do organizador."
+        );
+      }
+    }
+
     return NextResponse.json(
       {
         success: true,
@@ -121,6 +235,7 @@ export async function GET(
         },
 
         seats: seatsWithAvailability,
+        organizerStats,
       },
       {
         status: 200,

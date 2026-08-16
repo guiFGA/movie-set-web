@@ -16,6 +16,9 @@ interface JwtPayload {
 
 export async function POST(request: NextRequest) {
   const transaction = await sequelize.transaction();
+  /* Define expiração da reserva em 5 minutos */
+
+  const expiresAt = new Date(Date.now() + 5 * 60 * 1000); 
 
   try {
     /* VERIFICAR AUTENTICAÇÃO */
@@ -244,6 +247,8 @@ export async function POST(request: NextRequest) {
           status: ReservationStatus.PENDING,
 
           total_price: totalPrice.toFixed(2),
+
+          expires_at: expiresAt,
         },
         {
           transaction,
