@@ -108,6 +108,10 @@ export default function PaymentPage() {
     });
   }
 
+  function sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   async function handlePayment(
     result: "APPROVED" | "DECLINED"
   ) {
@@ -155,7 +159,9 @@ export default function PaymentPage() {
           `/pagamento/sucesso/${reservation.id}`
         );
       } else {
-        setMessage("Pagamento recusado.");
+        setMessage("Pagamento recusado, você será redirecionado...");
+        await sleep(4000);
+        router.push(`/eventos-disponiveis`);;
       }
     } catch (error) {
       console.error(
