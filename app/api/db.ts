@@ -15,7 +15,7 @@ export async function connectDatabase() {
     await sequelize.authenticate();
     console.log("Banco conectado com sucesso.");
 
-    await sequelize.sync({alter: true});
+   
 
     console.log("Banco sincronizado.");
   } catch (error) {
