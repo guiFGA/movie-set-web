@@ -16,6 +16,7 @@ interface ReservationAttributes {
   event_id: number;
   status: ReservationStatus;
   total_price: string;
+  expires_at: Date;
 }
 
 interface ReservationCreationAttributes
@@ -30,6 +31,7 @@ class Reservation
   declare event_id: number;
   declare status: ReservationStatus;
   declare total_price: string;
+  declare expires_at: Date;
 }
 
 Reservation.init(
@@ -66,6 +68,11 @@ Reservation.init(
 
     total_price: {
       type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+
+    expires_at: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
   },
