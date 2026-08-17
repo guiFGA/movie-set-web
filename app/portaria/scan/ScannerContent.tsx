@@ -6,6 +6,8 @@ import { Html5Qrcode } from "html5-qrcode";
 
 import styles from "./page.module.css";
 
+const processingRef = useRef(false);
+
 interface ScannerContentProps {
   eventId: string | null;
 }
@@ -114,15 +116,18 @@ export default function ScannerContent({
         "Erro ao parar câmera:",
         error
       );
+      scannerRef.current = null;
+      setScanning(false);
     }
   }
 
   async function handleQrRead(
     decodedText: string
   ) {
-    if (validating || result) {
+    if (processingRef.current){
       return;
     }
+    processingRef.current = true;
 
     try {
       setValidating(true);
@@ -214,6 +219,7 @@ export default function ScannerContent({
     setResult(null);
     setMessage("");
 
+    processingRef.current = false;
     await startScanner();
   }
 
