@@ -60,4 +60,4 @@ User.init(
   }
 );
 
-export { User };
+export { User, UserRole };
