@@ -13,7 +13,7 @@ Na entrada do evento, um usuário de portaria pode validar o ingresso utilizando
 A aplicação está disponível em:
 
 **Produção:**  
-https://movie-set-mscxb5ue2-gui-fga.vercel.app/
+https://movie-set-gianmdl7q-gui-fga.vercel.app/
 
 > O deploy foi realizado utilizando Vercel e banco PostgreSQL hospedado no Neon.
 
