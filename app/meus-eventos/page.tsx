@@ -18,6 +18,8 @@ interface Event {
   status: "PUBLISHED" | "CANCELLED";
 }
 
+
+
 type DisplayStatus =
   | "PUBLISHED"
   | "ENDED"

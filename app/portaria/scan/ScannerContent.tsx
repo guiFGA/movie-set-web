@@ -217,8 +217,7 @@ export default function ScannerContent({
     await startScanner();
   }
 
-  // IMPORTANTE:
-  // ESTE RETURN PRECISA ESTAR DENTRO DA FUNÇÃO
+ 
   return (
     <main className={styles.container}>
       <header className={styles.header}>
