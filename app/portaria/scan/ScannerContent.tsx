@@ -6,7 +6,7 @@ import { Html5Qrcode } from "html5-qrcode";
 
 import styles from "./page.module.css";
 
-const processingRef = useRef(false);
+
 
 interface ScannerContentProps {
   eventId: string | null;
@@ -29,6 +29,7 @@ export default function ScannerContent({
   eventId,
 }: ScannerContentProps) {
   const router = useRouter();
+  const processingRef = useRef(false);
 
   const scannerRef = useRef<Html5Qrcode | null>(null);
 

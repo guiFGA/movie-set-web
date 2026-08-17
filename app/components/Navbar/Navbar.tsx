@@ -73,7 +73,7 @@ export default function Navbar(){
                 {/*para o cliente*/}
                 {role==="CUSTOMER" && (
                     <li><Link href="/meus-ingressos">Meus Ingressos</Link></li>)}
-                {role==="CUSTOMER" && (
+                {role==="CUSTOMER" || !role && (
                     <li><Link href="/eventos-disponiveis">Eventos Disponíveis</Link></li>)}
                 {/*para organizador*/}
                 {role==="ORGANIZER" &&( 
