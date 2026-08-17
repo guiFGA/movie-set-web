@@ -18,6 +18,8 @@ interface Event {
   status: "PUBLISHED" | "CANCELLED";
 }
 
+
+
 type DisplayStatus =
   | "PUBLISHED"
   | "ENDED"
@@ -257,7 +259,7 @@ export default function MyEventsPage() {
             type="button"
             className={styles.createButton}
             onClick={() =>
-              router.push("/criar-evento")
+              router.push("/criar-eventos")
             }
           >
             Criar novo evento

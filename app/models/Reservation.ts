@@ -73,7 +73,6 @@ Reservation.init(
 
     expires_at: {
       type: DataTypes.DATE,
-      allowNull: false,
     },
   },
   {

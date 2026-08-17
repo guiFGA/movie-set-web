@@ -160,7 +160,7 @@ export default function CreateEventPage() {
         setCapacity("");
         
         setTimeout(() => {
-          router.push("/eventos-disponiveis");
+          router.push("/meus-eventos");
         }, 2000);
       }
     } catch (error) {
