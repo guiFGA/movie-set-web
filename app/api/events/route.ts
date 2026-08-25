@@ -26,6 +26,22 @@ interface CreateEventBody {
   capacity: number;
 }
 
+//FUNÇAO PARA CRIAÇÂO DOS ASSENTOS
+function getRowLabel(index: number): string {
+  let label = "";
+  let value = index;
+
+  while (value >= 0) {
+    label =
+      String.fromCharCode((value % 26) + 65) +
+      label;
+
+    value = Math.floor(value / 26) - 1;
+  }
+
+  return label;
+}
+
 //CRIAÇÃO DE EVENTOS
 
 export async function POST(request: NextRequest) {
@@ -168,12 +184,11 @@ export async function POST(request: NextRequest) {
     const seatsPerRow = 10;
 
     for (let i = 0; i < capacity; i++) {
-      const rowIndex = Math.floor(i / seatsPerRow);
-
-      const row = String.fromCharCode(
-        65 + rowIndex
+      const rowIndex = Math.floor(
+        i/seatsPerRow
       );
-
+      
+      const row = getRowLabel(rowIndex);
       const number =
         (i % seatsPerRow) + 1;
 

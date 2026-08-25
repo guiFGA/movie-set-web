@@ -120,8 +120,7 @@ export async function GET(
       },
 
       order: [
-        ["row", "ASC"],
-        ["number", "ASC"],
+        ["id", "ASC"]
       ],
     });
 
